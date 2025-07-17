@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protecting Daisy - Panel de Seguridad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      margin-top: 20px;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #0ff; }
+      50% { text-shadow: 0 0 30px #0ff; }
+      100% { text-shadow: 0 0 10px #0ff; }
+    }
+    header img {
+      width: 150px;
+      height: auto;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin: 10px 0;
+    }
+    .panel {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2em;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px 0;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+    }
+    .panel h2 {
+      font-size: 1.6em;
+      margin-bottom: 1em;
+    }
+    .card {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid #0ff;
+      border-radius: 15px;
+      padding: 1em;
+      margin: 10px 0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #0ff;
+    }
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0ff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      color: black;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background-color: #00cfcf;
+      transform: scale(1.05);
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    .alert {
+      color: red;
+      font-weight: bold;
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+    #login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="login">
+    <h2>Inicio de Sesión</h2>
+    <input type="text" id="user" placeholder="Nombre de usuario">
+    <input type="password" id="pass" placeholder="Contraseña">
+    <button onclick="iniciarSesion()">Entrar</button>
+  </div>
+
+  <div id="contenido" style="display:none;">
+    <header>
+      <a href="/inicio.html"><button class="back-button">⬅ Volver al inicio</button></a>
+      <img src="ccc7464d-fc0c-4511-b2e2-626ad96da56c.png" alt="Logo Daisy">
+      <h1>Protecting Daisy - Panel de Seguridad</h1>
+    </header>
+
+    <div class="panel">
+      <h2>Guardado de Datos</h2>
+      <div class="card">
+        <input type="email" placeholder="Correo electrónico">
+        <input type="text" placeholder="DNI">
+        <input type="text" placeholder="Número de tarjeta">
+        <button>Guardar datos</button>
+      </div>
+
+      <h2>Suscripción Premium</h2>
+      <div class="card">
+        <p>🎁 Accede a funciones avanzadas por solo S/30 al mes:</p>
+        <ul>
+          <li>✔️ Protección automática mejorada</li>
+          <li>✔️ Alertas visuales animadas</li>
+          <li>✔️ Consultas ilimitadas con Daisy IA</li>
+          <li>✔️ Análisis de malware en tiempo real</li>
+        </ul>
+        <button>Suscribirme</button>
+      </div>
+
+      <h2>Alerta de Sitios Maliciosos</h2>
+      <div class="card">
+        <input type="url" id="siteUrl" placeholder="Ingresa una URL para analizar">
+        <button onclick="analizarSitio()">Analizar</button>
+        <p id="resultado" class="alert"></p>
+      </div>
+
+      <h2>Asistente Virtual Daisy IA</h2>
+      <div class="card">
+        <textarea id="entradaUsuario" placeholder="Hazme una pregunta..."></textarea>
+        <button onclick="responderIA()">Preguntar</button>
+        <p id="respuestaIA"></p>
+      </div>
+
+      <h2>Detectores de Malware Recomendados</h2>
+      <div class="card">
+        <ul>
+          <li><a href="https://www.virustotal.com" target="_blank">VirusTotal</a></li>
+          <li><a href="https://sitecheck.sucuri.net/" target="_blank">Sucuri SiteCheck</a></li>
+          <li><a href="https://scanner.pcrisk.com/" target="_blank">PCRisk Scanner</a></li>
+          <li><a href="https://www.urlvoid.com/" target="_blank">URLVoid</a></li>
+        </ul>
+      </div>
+
+      <h2>Soporte</h2>
+      <div class="card">
+        <p>¿Tienes problemas? Contáctanos a soporte@protectingdaisy.com</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function iniciarSesion() {
+      const user = document.getElementById("user").value;
+      const pass = document.getElementById("pass").value;
+      if (user === "admin" && pass === "daisy123") {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("contenido").style.display = "block";
+      } else {
+        alert("Credenciales incorrectas. Intenta de nuevo.");
+      }
+    }
+
+    function analizarSitio() {
+      const url = document.getElementById('siteUrl').value;
+      const resultado = document.getElementById('resultado');
+      if (url.includes("malicioso") || url.includes("phishing")) {
+        resultado.textContent = "¡Cuidado! Sitio potencialmente peligroso 🚨";
+      } else {
+        resultado.textContent = "Este sitio parece seguro ✅";
+      }
+    }
+
+    function responderIA() {
+      const entrada = document.getElementById("entradaUsuario").value.toLowerCase();
+      const respuesta = document.getElementById("respuestaIA");
+      let res = "";
+      if (entrada.includes("hola")) res = "¡Hola! ¿En qué puedo ayudarte?";
+      else if (entrada.includes("cómo protegerme")) res = "Usa antivirus, evita sitios dudosos, y no compartas datos personales.";
+      else if (entrada.includes("pagar premium")) res = "Puedes pagar premium desde el panel con tu tarjeta.";
+      else if (entrada.includes("qué es daisy")) res = "Soy Daisy, tu asistente IA de seguridad digital.";
+      else if (entrada.includes("recomendaciones")) res = "Usa navegadores seguros, antivirus y analiza sitios sospechosos.";
+      else if (entrada.includes("antivirus")) res = "Avast, BitDefender, Malwarebytes y Kaspersky son buenas opciones.";
+      else if (entrada.includes("phishing")) res = "Es un intento de robar tus datos simulando una web legítima.";
+      else if (entrada.includes("detectar sitio peligroso")) res = "Verifica si usa HTTPS, faltas ortográficas, o pide datos sin razón.";
+      else if (entrada.includes("chiste")) res = "¿Por qué el hacker fue a terapia? Porque tenía muchos problemas de conexión 😂";
+      else if (entrada.includes("curiosidad")) res = "¿Sabías que el primer virus informático se llamaba Brain y apareció en 1986?";
+      else if (entrada.includes("modo oscuro")) res = "¡Ya estás en modo oscuro futurista! 😎";
+      else res = "Lo siento, aún no tengo respuesta para eso. Estoy aprendiendo 💡";
+      respuesta.textContent = res;
+      const speech = new SpeechSynthesisUtterance(res);
+      speech.lang = "es-ES";
+      speechSynthesis.speak(speech);
+    }
+  </script>
+</body>
+
+</html>
